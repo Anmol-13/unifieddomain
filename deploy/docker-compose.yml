@@ -1,0 +1,51 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: udd
+      POSTGRES_PASSWORD: udd
+      POSTGRES_DB: udd
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  krb5-kdc:
+    image: mitkrb5/mit-krb5-kdc:1.20
+    restart: unless-stopped
+    environment:
+      REALM: UD.INTERNAL
+      KADMIN_PASS: adminpassword
+    ports:
+      - "88:88/udp"
+      - "749:749"
+    volumes:
+      - krb5data:/var/lib/krb5kdc
+
+  udd:
+    build:
+      context: ..
+      dockerfile: deploy/udd.Dockerfile
+    depends_on:
+      - postgres
+      - krb5-kdc
+    environment:
+      UD__DATABASE__URL: postgres://udd:udd@postgres:5432/udd
+      UD__KERBEROS__ENABLED: "true"
+      UD__KERBEROS__REALM: "UD.INTERNAL"
+      UD__KERBEROS__KADMIN_PATH: "/usr/sbin/kadmin.local"
+      UD__KERBEROS__KEYTAB_DIR: "/var/lib/udd/keytabs"
+    ports:
+      - "8443:8443"
+    volumes:
+      - ../config:/app/config:ro
+      - ../deploy/certs:/app/deploy/certs:ro
+      - uddkeytabs:/var/lib/udd/keytabs
+      - krb5data:/var/lib/krb5kdc:ro
+
+volumes:
+  pgdata:
+  krb5data:
+  uddkeytabs:

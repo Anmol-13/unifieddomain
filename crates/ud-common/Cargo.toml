@@ -1,0 +1,18 @@
+[package]
+name = "ud-common"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+config = { workspace = true }
+tokio = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+serde_with = { workspace = true }
+uuid = { workspace = true }
+argon2 = { workspace = true }
+rustls = { workspace = true }

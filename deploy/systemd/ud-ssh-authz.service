@@ -1,0 +1,20 @@
+[Unit]
+Description=UnifiedDomain SSH AuthorizedKeys helper
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=root
+Group=root
+Environment=RUST_LOG=info
+ExecStart=/usr/local/bin/ud-ssh-authz \
+  --server https://udd:8443 \
+  --host-fingerprint %H \
+  --user %u \
+  --cert /etc/ud/device.pem \
+  --key /etc/ud/device-key.pem \
+  --ca /etc/ud/ca.pem
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

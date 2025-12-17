@@ -1,0 +1,22 @@
+[Unit]
+Description=UnifiedDomain Daemon (udd)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=udd
+Group=udd
+Environment=RUST_LOG=info
+Environment=UD__DATABASE__URL=postgres://udd:udd@localhost:5432/udd
+Environment=UD__SERVER__LISTEN_ADDR=0.0.0.0:8443
+Environment=UD__AUTH__ADMIN_TOKEN=changeme-admin-token
+Environment=UD__AUTH__ADMIN_TOKEN_ENABLED=false
+Environment=UD__AUTH__MTLS_CA_CERT_PATH=/etc/ud/ca.pem
+Environment=UD__AUTH__MTLS_CA_KEY_PATH=/etc/ud/ca-key.pem
+WorkingDirectory=/var/lib/udd
+ExecStart=/usr/local/bin/udd
+Restart=on-failure
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,30 @@
+[package]
+name = "udd"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ud-common = { path = "../ud-common" }
+anyhow = { workspace = true }
+axum = { workspace = true }
+axum-server = { workspace = true }
+hyper = { workspace = true }
+hyper-util = { workspace = true }
+tokio = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+rustls = { workspace = true }
+tokio-rustls = { workspace = true }
+rustls-pemfile = { workspace = true }
+sqlx = { workspace = true, features = ["uuid", "time", "runtime-tokio-rustls", "postgres", "macros", "migrate"] }
+uuid = { workspace = true }
+time = { workspace = true }
+serde_with = { workspace = true }
+rand_core = { workspace = true }
+argon2 = { workspace = true }
+http-body-util = { workspace = true }
+rcgen = { workspace = true }
+sha2 = { workspace = true }
+hex = { workspace = true }

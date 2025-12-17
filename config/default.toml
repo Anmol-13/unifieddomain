@@ -1,0 +1,21 @@
+[server]
+listen_addr = "0.0.0.0:8443"
+tls_cert_path = "deploy/certs/udd.pem"
+tls_key_path = "deploy/certs/udd-key.pem"
+
+[auth]
+admin_token = "changeme-admin-token"
+mtls_ca_cert_path = "deploy/certs/ca.pem"
+mtls_ca_key_path = "deploy/certs/ca-key.pem"
+admin_token_enabled = true
+
+[kerberos]
+enabled = false
+realm = "UD.INTERNAL"
+kadmin_path = "/usr/sbin/kadmin.local"
+keytab_dir = "/var/lib/udd/keytabs"
+
+[database]
+url = "postgres://udd:udd@localhost:5432/udd"
+
+domain = "UD.INTERNAL"
