@@ -45,4 +45,4 @@ rcgen = { version = "0.12", features = ["x509-parser"] }
 sha2 = "0.10"
 hex = "0.4"
 [patch.crates-io]
-base64ct = { git = "https://github.com/RustCrypto/utils", tag = "base64ct/v1.6.0" }
+# no overrides
