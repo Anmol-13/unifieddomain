@@ -39,6 +39,8 @@ services:
       UD__KERBEROS__REALM: "UD.INTERNAL"
       UD__KERBEROS__KADMIN_PATH: "/usr/sbin/kadmin.local"
       UD__KERBEROS__KEYTAB_DIR: "/var/lib/udd/keytabs"
+      UD__AUTH__MTLS_CA_CERT_PATH: ""
+      UD__AUTH__MTLS_CA_KEY_PATH: ""
     ports:
       - "8443:8443"
     volumes:
